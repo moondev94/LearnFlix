@@ -1,24 +1,33 @@
 import '../App.css'
+import {useState} from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 
 
 function Header() {
+
+const [showMenu, setShowMenu] = useState(false);
+
   return (
+    <>
     <header> 
-      <nav>
+      <FontAwesomeIcon className='menu-bars' onClick={() => setShowMenu(!showMenu)} icon={faBars}/>
+
         <h1>Learn<span>Flix</span></h1>
-        <a className="sign-in-btn">Sign In</a>
-         <div class="menu">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </div>
-        <ul>
-            <li href="#">Início</li>
-            <li href="#">Sobre</li>
-            <li href="#">Contato</li>
-        </ul>
-      </nav>
+        <a className="sign-in-btn">Sign In</a>    
     </header>
+
+    {showMenu && (
+      <nav className={showMenu ? "menu open" : "menu"}>
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+  )}
+  </>
   );
 }
 
