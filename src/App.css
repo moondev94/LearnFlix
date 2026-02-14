@@ -3,76 +3,128 @@
 /* ================= RESET / BASE ================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
 
 :root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --text-light-color: #ffffff;
-  --primary-color: #1e465f;
-  --elements-bg-color: #f0f0f0;
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --text-light-color: #ffffff;
+    --primary-color: #206992;
+    --primary-color-hover: #1e465f;
+    --elements-bg-color: #f0f0f0;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: var(--elements-bg-color);
-    box-shadow: 0px 4px 2px -2px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 10;
-}
-
-header h1 {
-    display: flex;
-    justify-content: center;
-    margin: 18px;
+    background-color: var(--bg-color);
     color: var(--text-color);
-    align-self: center;
-    width: 33.3%;
+}
 
+.main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+}
+
+button,
+a {
+    all: unset;
 }
 
 span {
     color: var(--primary-color);
 }
 
-.menu-bars {
-    font-size: 32px;
+
+/* ================= HEADER ================= */
+
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    background-color: var(--elements-bg-color);
+    box-shadow: 0px 4px 2px -2px rgba(0, 0, 0, 0.2);
+    transition: backgrond-color 0.3s ease;
+    z-index: 100;
+}
+
+
+.header h1 {
+    text-align: center;
     color: var(--text-color);
-    align-self: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 200;  
+}
+
+.header.menu-active h1 span {
+  color: var(--text-light-color);
+  transform: translateY(-4px);
+  opacity: 0.9;
+}
+
+.header.menu-active .menu-bars {
+    transform: rotate(90deg);
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-bars {
+    font-size: 28px;
+    color: var(--primary-color);
     margin: 18px;
-    width: 33.3%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 200;
 }
 
 .menu-bars:hover {
-    color: var(--primary-color);
+    color: var(--primary-color-hover);
 }
 
+.sign-in-btn {
+    text-align: center;
+    cursor: pointer;
+    color: var(--text-light-color);
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin: 18px;
+}
+
+.sign-in-btn:hover {
+    background-color: var(--primary-color-hover);
+}
+
+
+/* ================= MENU ================= */
+
 .menu {
-  position: fixed;
-  top: 0px;
-  left: 0;
-  width: 0;
-  overflow: hidden;
-  height: 100vh;
-  background-color: var(--primary-color);
-  padding-top: 80px;
-  transition: width 0.3s ease;
-  z-index: 5;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 0;
+    overflow: hidden;
+    height: 100vh;
+    background-color: var(--primary-color);
+    padding-top: 80px;
+    transition: width 0.3s ease;
+    z-index: 5;
+    box-shadow: 4px 0px 2px -2px rgba(0, 0, 0, 0.2);
+    z-index: 150;
 }
 
 .menu.open {
-  width: 280px;
+    width: 280px;
 }
 
 .menu ul {
@@ -80,36 +132,88 @@ span {
     flex-direction: column;
     text-align: justify;
     align-items: flex-start;
-    padding: 18px;
+    padding: 0;
     list-style: none;
-    gap: 32px;
-   
 }
+
+.menu li {
+    width: 100%;
+    height: 48px;
+    transition: 0.3s;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+
+}
+
+.menu li:hover {
+    background-color: var(--primary-color-hover);
+}
+
 
 .menu li a {
     text-decoration: none;
     color: var(--text-light-color);
     cursor: pointer;
+    margin-left: 24px;
+
 }
 
-.sign-in-btn {
+
+/* ================= CARDS ================= */
+
+.card {
+    width: 350px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.content {
+    width: 100vh;
+    height: 100%;
+    background-color: var(--elements-bg-color);
+}
+
+.card-footer {
+    width: 350px;
+    height: auto;
+    border-radius: 0px 0px 8px 8px;
     display: flex;
     justify-content: center;
-    align-self: center;
-    text-align: center;
-    cursor: pointer;
-    background-color: var(--elements-color);
-    padding: 10px;
-    width: 33.3%;
-    border-radius: 12px;
-    border: solid 2px;
-    transition: 0.3s;
-    margin: 18px;
+    align-items: center;
+    margin-top: auto;
+    overflow: hidden;
+    color: var(--text-light-color);
+    background-color: var(--primary-color);
 }
 
-.sign-in-btn:hover {
+.card-btn {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: 0.3s;
     background-color: var(--primary-color);
+}
+
+.card-btn:hover {
+    background-color: var(--primary-color-hover);
+    fill: #fff;
+}
+
+
+.svg-icons {
+    width: 32px;
+    height: 32px;
     color: var(--text-light-color);
+
 }
 
 .footer {
@@ -121,4 +225,74 @@ span {
 }
 
 
-@media screen and (min-width: 767px) {}
+/* ================= DESKTOP ================= */
+
+@media screen and (min-width: 767px) {
+
+    .header h1 {
+        justify-self: flex-start;
+        margin-left: 48px;
+    }
+
+    .menu {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        display: flex;
+        box-shadow: none;
+
+    }
+
+    .menu ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 24px;
+        padding: 0;
+    }
+
+    .menu li:hover {
+        background: none;
+    }
+
+    .menu li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        padding: 0 10px;
+        border-radius: 10px;
+        color: var(--text-color);
+        transition: 0.3s;
+    }
+
+    .menu li a:hover {
+        background-color: var(--primary-color);
+        color: var(--text-light-color);
+    }
+
+    .menu.open {
+        width: auto;
+    }
+
+    .menu-bars {
+        display: none;
+    }
+
+    .sign-in-btn {
+        width: auto;
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+
+
+}

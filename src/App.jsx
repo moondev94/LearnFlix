@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
-import Footer from './components/Footer'
 import Card from './components/Card'
 import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +34,6 @@ function App() {
       button3= {<FontAwesomeIcon icon={faBookmark}/>}
       />
       </main>
-      <Footer/>
     </>
   )
 }
