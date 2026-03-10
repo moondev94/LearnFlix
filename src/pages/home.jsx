@@ -1,11 +1,12 @@
 import "../App.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
 
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
@@ -14,20 +15,20 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className="signin-page">
+    <div className="page-transition">
+      <div className="sign-page">
         <form onSubmit={handleSubmit}>
           <h2>Sign in</h2>
-          <div className="signup"> or <a href="#">create an account</a></div>
-          <div>
+          <div className="signup"> or <Link to="/signup">create an account</Link></div>
+          <div className="input-field">
             <p>E-mail</p>
-            <input type="email" placeholder="E-mail" required onChange={(e) => setUsername(e.target.value)}/> {/**/}
-            <FontAwesomeIcon icon={faUser} />
+            <input type="email" placeholder="E-mail" required onChange={(e) => setUsername(e.target.value)} /> {/**/}
+            <FontAwesomeIcon className="input-icon" icon={faUser} />
           </div>
-          <div>
+          <div className="input-field">
             <p>Password</p>
-            <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
-            <FontAwesomeIcon icon={faLock} />
+            <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
+            <FontAwesomeIcon className="input-icon" icon={faLock} />
           </div>
           <div className="remember-login">
             <label>
@@ -35,10 +36,10 @@ export default function Home() {
               Remember me
             </label>
           </div>
-          <button>Entrar</button>
+          <button>Sign in</button>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

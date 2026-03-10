@@ -1,6 +1,6 @@
 import "../App.css";
 
-function Card({content, button1, button2, button3}) {
+export default function Card({content, button1, button2, button3}) {
   return (
     <div className="card">
         <div className="content">
@@ -21,4 +21,4 @@ function Card({content, button1, button2, button3}) {
   );
 }
 
-export default Card;
+

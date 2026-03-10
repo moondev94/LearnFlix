@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header'
-import Card from './components/Card'
-import React, { useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faPlay, faBookmark  } from "@fortawesome/free-solid-svg-icons";
+import { Routes, Route } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header';
+import Home from './pages/home';
+import Signup from './pages/signup';
+import About from './pages/about'
+
 
 
 
@@ -13,26 +13,13 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <main className='main'>
-      <Card
-      content="Aula 1"
-      button1= {<FontAwesomeIcon icon={faPlay}/>}
-      button2= ""
-      button3= {<FontAwesomeIcon icon={faBookmark}/>}
-      />
-      <Card
-      content=" Aula 2"
-      button1= {<FontAwesomeIcon icon={faPlay}/>}
-      button2= ""
-      button3= {<FontAwesomeIcon icon={faBookmark}/>}
-      />
-      <Card
-      content="Aula 3"
-      button1= {<FontAwesomeIcon icon={faPlay}/>}
-      button2= ""
-      button3= {<FontAwesomeIcon icon={faBookmark}/>}
-      />
+      <Header />
+      <main>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/about' element={<About />} />
+        </Routes>
       </main>
     </>
   )
