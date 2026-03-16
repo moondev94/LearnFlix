@@ -8,13 +8,13 @@ export default function Card({content, button1, button2, button3}) {
         </div>
       <div className="card-footer">
         <div className="card-btn">
-            <button className="svg-icons">{button1}</button>
+            <button className="svg-icons btn-reset">{button1}</button>
         </div>
         <div className="card-btn">
-            <button className="svg-icons">{button2}</button>
+            <button className="svg-icons btn-reset">{button2}</button>
         </div>
         <div className="card-btn">
-            <button className="svg-icons">{button3}</button>
+            <button className="svg-icons btn-reset">{button3}</button>
         </div>
       </div>
     </div>

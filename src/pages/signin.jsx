@@ -41,7 +41,7 @@ export default function Home() {
               Remember me
             </label>
           </div>
-          <button onClick={() => dispatch(loginStudent())}>Sign in</button>
+          <button className="sign-in-btn btn-reset" onClick={() => dispatch(loginStudent())}>Sign in</button>
         </form>
       </div>
     </div>

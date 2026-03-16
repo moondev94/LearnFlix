@@ -79,7 +79,7 @@ export default function Header() {
   </nav>
 
   <Link to={logged ? "/" : "/signup"} className="header-right">
-    <button className="sign-in-btn" onClick={handleAuthClick}>
+    <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
       {logged ? "Sair" : "Sign Up"}
     </button>
   </Link>

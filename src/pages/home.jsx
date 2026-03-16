@@ -30,14 +30,14 @@ export default function Home() {
         <div className="hero-actions">
 
           <button
-            className="hero-btn"
+            className="hero-btn btn-reset"
             onClick={() => dispatch(loginStudent())}
           >
             Entrar como aluno
           </button>
 
           <Link to="/signup">
-            <button className="hero-btn-outline">
+            <button className="hero-btn-outline btn-reset">
               Criar conta
             </button>
           </Link>

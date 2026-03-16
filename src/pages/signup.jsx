@@ -36,7 +36,7 @@ export default function Signup() {
             <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
             <FontAwesomeIcon className="input-icon" icon={faLock} />
           </div>
-          <button>Create account</button>
+          <button className="sign-in-btn btn-reset">Create account</button>
         </form>
       </div>
     </div>
