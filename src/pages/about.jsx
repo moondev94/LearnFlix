@@ -1,3 +1,5 @@
+import '../App.css'
+
 export default function About() {
     return (
         <section className="about-page">
