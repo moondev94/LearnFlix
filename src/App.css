@@ -484,9 +484,10 @@ header h1 {
 }
 
 .calendar-card .holiday {
-  background-color: rgba(124, 58, 237, 0.25);
-  color: var(--primary);
-  font-weight: 600;
+  background: var(--primary-color) !important;
+  color: white !important;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 /* ===== DESKTOP ===== */
