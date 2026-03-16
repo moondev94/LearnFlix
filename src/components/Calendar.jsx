@@ -1,27 +1,25 @@
-import '../App.css'
-import "react-calendar/dist/Calendar.css";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 export default function CardCalendar() {
 
   const [date, setDate] = useState(new Date());
 
-  const holidays =
-    useSelector((state) => state.calendar.holidays) || [];
+  const holidays = useSelector(
+    (state) => state.calendar.holidays
+  );
+  console.log(holidays);
 
-  const holidayDates = holidays.map(h => h.date);
+  // ✅ função que marca feriados
+  const isHoliday = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
 
-  function isHoliday(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    const formattedDate = `${year}-${month}-${day}`;
-
-    return holidayDates.includes(formattedDate);
-  }
+    return holidays.some(
+      (holiday) => holiday.date === formattedDate
+    );
+  };
 
   return (
     <div className="dashboard-card calendar-card">
@@ -31,12 +29,11 @@ export default function CardCalendar() {
       <Calendar
         onChange={setDate}
         value={date}
-        tileClassName={({ date, view }) => {
-          if (view === "month" && isHoliday(date)) {
-            return "holiday";
-          }
-          return null;
-        }}
+        tileClassName={({ date, view }) =>
+          view === "month" && isHoliday(date)
+            ? "holiday"
+            : null
+        }
       />
 
     </div>

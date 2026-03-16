@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-// ===== API ===== //
+// API de feriados brasileiros
 export const fetchHolidays = createAsyncThunk(
   "calendar/fetchHolidays",
   async () => {
@@ -17,7 +17,6 @@ export const fetchHolidays = createAsyncThunk(
 
 const calendarSlice = createSlice({
   name: "calendar",
-
   initialState: {
     holidays: [],
     loading: false,
