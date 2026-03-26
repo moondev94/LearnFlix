@@ -1,5 +1,5 @@
 import '../App.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/authSlice";
@@ -7,16 +7,63 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
-  const user = useSelector((state) => state.auth.user);
+  const logged = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+
   const [showMenu, setShowMenu] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const minSwipeDistance = 70;
 
   const handleAuthClick = () => {
-    if (user) {
+    if (logged) {
       dispatch(logout());
       setShowMenu(false);
     }
   };
+
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      setTouchEndX(null);
+      setTouchStartX(e.touches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+      setTouchEndX(e.touches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+      if (touchStartX === null || touchEndX === null) return;
+
+      const distance = touchEndX - touchStartX;
+      const isRightSwipe = distance > minSwipeDistance;
+      const isLeftSwipe = distance < -minSwipeDistance;
+
+      if (isRightSwipe && touchStartX <= 40) {
+        setShowMenu(true);
+      }
+
+      if (isLeftSwipe && showMenu) {
+        setShowMenu(false);
+      }
+
+      setTouchStartX(null);
+      setTouchEndX(null);
+    };
+
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [touchStartX, touchEndX, showMenu]);
+
+  {showMenu && <div className="menu-overlay" onClick={() => setShowMenu(false)}></div>}
 
   return (
     <header className={`header ${showMenu ? "menu-active" : ""}`}>
@@ -38,30 +85,27 @@ export default function Header() {
 
       <nav className={`menu ${showMenu ? "open" : ""}`}>
         <ul>
-          {!user && (
+          {!logged && (
             <>
               <li>
                 <Link to="/" onClick={() => setShowMenu(false)}>Home</Link>
               </li>
-
               <li>
                 <Link to="/about" onClick={() => setShowMenu(false)}>Sobre</Link>
               </li>
-
               <li>
                 <Link to="/contato" onClick={() => setShowMenu(false)}>Contato</Link>
               </li>
             </>
           )}
 
-          {user?.role === "student" && (
+          {logged?.role === "student" && (
             <>
               <li>
                 <Link to="/dashboard/aluno" onClick={() => setShowMenu(false)}>
                   Dashboard
                 </Link>
               </li>
-
               <li>
                 <Link to="/perfil" onClick={() => setShowMenu(false)}>
                   Perfil
@@ -70,49 +114,27 @@ export default function Header() {
             </>
           )}
 
-          {user?.role === "teacher" && (
-            <>
-              <li>
-                <Link to="/dashboard/professor" onClick={() => setShowMenu(false)}>
-                  Dashboard
-                </Link>
-              </li>
-
-              <li>
-                <Link to="/dashboard/professor" onClick={() => setShowMenu(false)}>
-                  Turmas
-                </Link>
-              </li>
-            </>
+          {logged?.role === "teacher" && (
+            <li>
+              <Link to="/dashboard/professor" onClick={() => setShowMenu(false)}>
+                Dashboard
+              </Link>
+            </li>
           )}
 
-          {user?.role === "manager" && (
-            <>
-              <li>
-                <Link to="/dashboard/gestor" onClick={() => setShowMenu(false)}>
-                  Dashboard
-                </Link>
-              </li>
-
-              <li>
-                <Link to="/dashboard/gestor" onClick={() => setShowMenu(false)}>
-                  Relatórios
-                </Link>
-              </li>
-            </>
+          {logged?.role === "manager" && (
+            <li>
+              <Link to="/dashboard/gestor" onClick={() => setShowMenu(false)}>
+                Dashboard
+              </Link>
+            </li>
           )}
         </ul>
       </nav>
 
-      <Link
-        to={user ? "/" : "/signup"}
-        className="header-right"
-        onClick={() => {
-          if (!user) setShowMenu(false);
-        }}
-      >
+      <Link to={logged ? "/" : "/signup"} className="header-right">
         <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
-          {user ? "Sair" : "Sign Up"}
+          {logged ? "Sair" : "Sign Up"}
         </button>
       </Link>
     </header>
