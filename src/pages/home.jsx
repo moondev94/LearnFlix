@@ -1,7 +1,7 @@
 import "../App.css";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStudent } from "../store/authSlice";
+import { loginStudent, loginTeacher, loginManager } from "../store/authSlice";
 
 export default function Home() {
 
@@ -10,6 +10,14 @@ export default function Home() {
 
   if (user?.role === "student") {
     return <Navigate to="/dashboard/aluno" replace />;
+  }
+
+  if (user?.role === "teacher") {
+    return <Navigate to="/dashboard/professor" replace />;
+  }
+
+  if (user?.role === "manager") {
+    return <Navigate to="/dashboard/gestor" replace />;
   }
 
   return (
@@ -34,6 +42,20 @@ export default function Home() {
             onClick={() => dispatch(loginStudent())}
           >
             Entrar como aluno
+          </button>
+
+          <button
+            className="hero-btn-outline btn-reset"
+            onClick={() => dispatch(loginTeacher())}
+          >
+            Entrar como professor
+          </button>
+
+          <button
+            className="hero-btn-outline btn-reset"
+            onClick={() => dispatch(loginManager())}
+          >
+            Entrar como gestor
           </button>
 
           <Link to="/signup">

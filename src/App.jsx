@@ -5,32 +5,31 @@ import { store } from "./store/store";
 import Header from './components/Header';
 import Home from './pages/home';
 import Signup from './pages/signup';
-import About from './pages/about'
+import About from './pages/about';
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
+import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
+import ManagerDashboard from "./pages/dashboards/ManagerDashboard";
 import StudentProfile from "./pages/StudentProfile";
 
-
-
-
 function App() {
-
-
   return (
     <>
-    <Provider store={store}>
-      <Header />
-      <main>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/about' element={<About />} />
-          <Route path="/dashboard/aluno" element={<StudentDashboard />} />
-  <Route path="/perfil" element={<StudentProfile />} />
-        </Routes>
-      </main>
+      <Provider store={store}>
+        <Header />
+        <main>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/about' element={<About />} />
+            <Route path="/dashboard/aluno" element={<StudentDashboard />} />
+            <Route path="/dashboard/professor" element={<TeacherDashboard />} />
+            <Route path="/dashboard/gestor" element={<ManagerDashboard />} />
+            <Route path="/perfil" element={<StudentProfile />} />
+          </Routes>
+        </main>
       </Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
