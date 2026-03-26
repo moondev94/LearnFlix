@@ -15,11 +15,25 @@ const authSlice = createSlice({
       };
     },
 
+    loginTeacher: (state) => {
+      state.user = {
+        name: "Professor Luan",
+        role: "teacher",
+      };
+    },
+
+    loginManager: (state) => {
+      state.user = {
+        name: "Gestor Luan",
+        role: "manager",
+      };
+    },
+
     logout: (state) => {
       state.user = null;
     },
   },
 });
 
-export const { loginStudent, logout } = authSlice.actions;
+export const { loginStudent, loginTeacher, loginManager, logout } = authSlice.actions;
 export default authSlice.reducer;
