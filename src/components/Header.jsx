@@ -6,86 +6,115 @@ import { logout } from "../store/authSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function Header() {
-
-  const logged = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleAuthClick = () => {
-    if (logged) {
+    if (user) {
       dispatch(logout());
+      setShowMenu(false);
     }
   };
 
-  const [showMenu, setShowMenu] = useState(false);
-
   return (
-    <>
-      <header className={`header ${showMenu ? "menu-active" : ""}`}>
+    <header className={`header ${showMenu ? "menu-active" : ""}`}>
+      <div className='header-left'>
+        <FontAwesomeIcon
+          className='menu-bars'
+          onClick={() => setShowMenu(!showMenu)}
+          icon={showMenu ? faXmark : faBars}
+        />
+      </div>
 
-  <div className='header-left'>
-    <FontAwesomeIcon
-      className='menu-bars'
-      onClick={() => setShowMenu(!showMenu)}
-      icon={showMenu ? faXmark : faBars}
-    />
-  </div>
+      <Link
+        to="/"
+        className="logo-link"
+        onClick={() => setShowMenu(false)}
+      >
+        <h1 className="logo">Learn<span>Flix</span></h1>
+      </Link>
 
-  <Link
-    to="/"
-    className="logo-link"
-    onClick={() => setShowMenu(false)}
-  >
-    <h1 className="logo">Learn<span>Flix</span></h1>
-  </Link>
+      <nav className={`menu ${showMenu ? "open" : ""}`}>
+        <ul>
+          {!user && (
+            <>
+              <li>
+                <Link to="/" onClick={() => setShowMenu(false)}>Home</Link>
+              </li>
 
-  <nav className={`menu ${showMenu ? "open" : ""}`}>
-    <ul>
+              <li>
+                <Link to="/about" onClick={() => setShowMenu(false)}>Sobre</Link>
+              </li>
 
-      {!logged && (
-        <>
-          <li>
-            <Link to="/" onClick={() => setShowMenu(false)}>Home</Link>
-          </li>
+              <li>
+                <Link to="/contato" onClick={() => setShowMenu(false)}>Contato</Link>
+              </li>
+            </>
+          )}
 
-          <li>
-            <Link to="/about" onClick={() => setShowMenu(false)}>Sobre</Link>
-          </li>
+          {user?.role === "student" && (
+            <>
+              <li>
+                <Link to="/dashboard/aluno" onClick={() => setShowMenu(false)}>
+                  Dashboard
+                </Link>
+              </li>
 
-          <li>
-            <Link to="/contato" onClick={() => setShowMenu(false)}>Contato</Link>
-          </li>
-        </>
-      )}
+              <li>
+                <Link to="/perfil" onClick={() => setShowMenu(false)}>
+                  Perfil
+                </Link>
+              </li>
+            </>
+          )}
 
-      {logged && (
-        <>
-          <li>
-            <Link to="/dashboard/aluno" onClick={() => setShowMenu(false)}>
-              Dashboard
-            </Link>
-          </li>
+          {user?.role === "teacher" && (
+            <>
+              <li>
+                <Link to="/dashboard/professor" onClick={() => setShowMenu(false)}>
+                  Dashboard
+                </Link>
+              </li>
 
-          <li>
-            <Link to="/perfil" onClick={() => setShowMenu(false)}>
-              Perfil
-            </Link>
-          </li>
-        </>
-      )}
+              <li>
+                <Link to="/dashboard/professor" onClick={() => setShowMenu(false)}>
+                  Turmas
+                </Link>
+              </li>
+            </>
+          )}
 
-    </ul>
-  </nav>
+          {user?.role === "manager" && (
+            <>
+              <li>
+                <Link to="/dashboard/gestor" onClick={() => setShowMenu(false)}>
+                  Dashboard
+                </Link>
+              </li>
 
-  <Link to={logged ? "/" : "/signup"} className="header-right">
-    <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
-      {logged ? "Sair" : "Sign Up"}
-    </button>
-  </Link>
+              <li>
+                <Link to="/dashboard/gestor" onClick={() => setShowMenu(false)}>
+                  Relatórios
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
 
-</header>
-
-    </>
+      <Link
+        to={user ? "/" : "/signup"}
+        className="header-right"
+        onClick={() => {
+          if (!user) setShowMenu(false);
+        }}
+      >
+        <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
+          {user ? "Sair" : "Sign Up"}
+        </button>
+      </Link>
+    </header>
   );
 }
