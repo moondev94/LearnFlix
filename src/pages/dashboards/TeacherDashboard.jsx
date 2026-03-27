@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent, removeEvent, updateEvent } from "../../store/calendarSlice";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { fetchHolidays } from "../../store/calendarSlice";
 import Calendar from "../../components/Calendar";
 import "../../App.css";
 
@@ -18,6 +20,10 @@ export default function TeacherDashboard() {
   const [course, setCourse] = useState("");
   const [description, setDescription] = useState("");
   const [editingEventId, setEditingEventId] = useState(null);
+
+  useEffect(() => {
+  dispatch(fetchHolidays());
+}, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
