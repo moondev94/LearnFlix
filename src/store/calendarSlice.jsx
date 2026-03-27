@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
-// API de feriados brasileiros
 export const fetchHolidays = createAsyncThunk(
   "calendar/fetchHolidays",
   async () => {
@@ -10,37 +8,51 @@ export const fetchHolidays = createAsyncThunk(
     );
 
     const data = await response.json();
-
     return data;
   }
 );
 
+const initialState = {
+  holidays: [],
+  events: [],
+  loading: false,
+  error: null,
+};
+
 const calendarSlice = createSlice({
   name: "calendar",
-  initialState: {
-    holidays: [],
-    loading: false,
-    error: null,
+  initialState,
+  reducers: {
+    addEvent: (state, action) => {
+      state.events.push(action.payload);
+    },
+
+    removeEvent: (state, action) => {
+      state.events = state.events.filter(
+        (event) => event.id !== action.payload
+      );
+    },
+
+    updateEvent: (state, action) => {
+      const index = state.events.findIndex(
+        (event) => event.id === action.payload.id
+      );
+
+      if (index !== -1) {
+        state.events[index] = action.payload;
+      }
+    },
   },
-
-  reducers: {},
-
   extraReducers: (builder) => {
     builder
-
-      // carregando
       .addCase(fetchHolidays.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-
-      // sucesso
       .addCase(fetchHolidays.fulfilled, (state, action) => {
         state.loading = false;
         state.holidays = action.payload;
       })
-
-      // erro
       .addCase(fetchHolidays.rejected, (state) => {
         state.loading = false;
         state.error = "Erro ao carregar feriados";
@@ -48,5 +60,5 @@ const calendarSlice = createSlice({
   },
 });
 
-
+export const { addEvent, removeEvent, updateEvent } = calendarSlice.actions;
 export default calendarSlice.reducer;

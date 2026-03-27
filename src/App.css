@@ -527,6 +527,95 @@ header h1 {
     padding: 3px 0;
 }
 
+.event-day {
+  border: 2px solid var(--primary-color);
+  font-weight: bold;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-form input,
+.event-form select,
+.event-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--elements-bg-color);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  color: var(--text-color);
+}
+
+.event-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.event-form input:focus,
+.event-form select:focus,
+.event-form textarea:focus {
+  outline: 2px solid rgba(32, 105, 146, 0.2);
+  border-color: var(--primary-color);
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid var(--elements-bg-color);
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.event-info strong {
+  font-size: 1rem;
+}
+
+.event-info p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.event-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 110px;
+}
+
+.delete-btn {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
+}
+
 /* ===== MOBILE GESTURES ===== */
 
 .menu-overlay {
