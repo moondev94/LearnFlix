@@ -10,6 +10,7 @@ import StudentDashboard from "./pages/dashboards/StudentDashboard";
 import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
 import ManagerDashboard from "./pages/dashboards/ManagerDashboard";
 import StudentProfile from "./pages/StudentProfile";
+import Classes from './pages/classes';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/dashboard/aluno" element={<StudentDashboard />} />
             <Route path="/dashboard/professor" element={<TeacherDashboard />} />
             <Route path="/dashboard/gestor" element={<ManagerDashboard />} />
+            <Route path="/classes" element={<Classes />} />
             <Route path="/perfil" element={<StudentProfile />} />
           </Routes>
         </main>

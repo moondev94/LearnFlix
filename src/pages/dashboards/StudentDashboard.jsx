@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import "../../App.css";
 import Calendar from "../../components/Calendar";
@@ -8,7 +8,10 @@ import { fetchHolidays } from "../../store/calendarSlice";
 export default function StudentDashboard() {
 
   const user = useSelector((state) => state.auth.user);
+  const courses = useSelector((state) => state.progress.courses);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchHolidays());
@@ -29,15 +32,40 @@ export default function StudentDashboard() {
           <h3>Calendário</h3>
           <Calendar />
         </div>
-        <div className="dashboard-card">
-          <h3>Disciplinas</h3>
-        </div>
 
         <div className="dashboard-card">
-          <h3>Progresso</h3>
-        </div>
+          <h3>Minhas Disciplinas</h3>
 
-        
+          <div className="progress-list">
+            {courses.map((course) => {
+              const progress = Math.round(
+                (course.completedLessons / course.totalLessons) * 100
+              );
+
+              return (
+                <div key={course.id}
+                  className="course-item"
+                  onClick={() => navigate("/classes")}>
+                  <div className="progress-header">
+                    <strong>{course.name}</strong>
+                    <span>{progress}%</span>
+                  </div>
+
+                  <p>
+                    {course.completedLessons} de {course.totalLessons} aulas concluídas
+                  </p>
+
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
       </div>
 

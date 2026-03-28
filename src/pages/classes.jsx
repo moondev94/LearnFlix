@@ -1,4 +1,7 @@
-import '../App.css'
+import "../App.css";
+import Card from "../components/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function Classes() {
    return (
