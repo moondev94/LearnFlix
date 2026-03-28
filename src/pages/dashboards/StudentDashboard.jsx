@@ -38,21 +38,26 @@ export default function StudentDashboard() {
 
           <div className="progress-list">
             {courses.map((course) => {
+              const completedLessons = course.lessons.filter(
+                (lesson) => lesson.completed
+              ).length;
+
               const progress = Math.round(
-                (course.completedLessons / course.totalLessons) * 100
+                (completedLessons / course.lessons.length) * 100
               );
+
 
               return (
                 <div key={course.id}
                   className="course-item"
-                  onClick={() => navigate("/classes")}>
+                  onClick={() => navigate(`/classes/${course.id}`)}>
                   <div className="progress-header">
                     <strong>{course.name}</strong>
                     <span>{progress}%</span>
                   </div>
 
                   <p>
-                    {course.completedLessons} de {course.totalLessons} aulas concluídas
+                    {completedLessons} de {course.lessons.length} aulas concluídas
                   </p>
 
                   <div className="progress-bar">

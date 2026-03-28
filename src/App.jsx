@@ -25,7 +25,7 @@ function App() {
             <Route path="/dashboard/aluno" element={<StudentDashboard />} />
             <Route path="/dashboard/professor" element={<TeacherDashboard />} />
             <Route path="/dashboard/gestor" element={<ManagerDashboard />} />
-            <Route path="/classes" element={<Classes />} />
+            <Route path="/classes/:id" element={<Classes />} />
             <Route path="/perfil" element={<StudentProfile />} />
           </Routes>
         </main>

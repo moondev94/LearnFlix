@@ -1,54 +1,61 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const generateLessons = (total, completed) => {
+  const lessons = [];
+
+  for (let i = 1; i <= total; i++) {
+    lessons.push({
+      id: i,
+      title: `Aula ${i}`,
+      completed: i <= completed,
+      bookmarked: false,
+    });
+  }
+
+  return lessons;
+};
+
 const initialState = {
   courses: [
     {
       id: 1,
       name: "Matemática",
-      totalLessons: 20,
-      completedLessons: 8,
+      lessons: generateLessons(20, 8),
     },
     {
       id: 2,
       name: "Português",
-      totalLessons: 15,
-      completedLessons: 10,
+      lessons: generateLessons(15, 10),
     },
     {
       id: 3,
       name: "Literatura",
-      totalLessons: 12,
-      completedLessons: 12,
+      lessons: generateLessons(12, 12),
     },
     {
       id: 4,
       name: "Física",
-      totalLessons: 12,
-      completedLessons: 4,
+      lessons: generateLessons(12, 4),
     },
     {
       id: 5,
       name: "Química",
-      totalLessons: 12,
-      completedLessons: 6,
+      lessons: generateLessons(12, 6),
     },
     {
       id: 6,
       name: "Biologia",
-      totalLessons: 12,
-      completedLessons: 8,
+      lessons: generateLessons(12, 8),
     },
     {
       id: 7,
       name: "Geografia",
-      totalLessons: 12,
-      completedLessons: 11,
+      lessons: generateLessons(12, 11),
     },
     {
-      id: 3,
+      id: 8,
       name: "Inglês",
-      totalLessons: 12,
-      completedLessons: 12,
+      lessons: generateLessons(12, 12),
     },
   ],
 };
