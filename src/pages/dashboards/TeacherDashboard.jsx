@@ -11,6 +11,7 @@ export default function TeacherDashboard() {
 
   const user = useSelector((state) => state.auth.user);
   const events = useSelector((state) => state.calendar.events);
+  const classes = useSelector((state) => state.teacher?.classes || []);
 
   const dispatch = useDispatch();
 
@@ -21,9 +22,10 @@ export default function TeacherDashboard() {
   const [description, setDescription] = useState("");
   const [editingEventId, setEditingEventId] = useState(null);
 
+
   useEffect(() => {
-  dispatch(fetchHolidays());
-}, [dispatch]);
+    dispatch(fetchHolidays());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,10 +97,60 @@ export default function TeacherDashboard() {
 
         <div className="dashboard-card">
           <h3>Turmas</h3>
+
+          <div className="teacher-class-list">
+            {classes.map((group) => (
+              <div key={group.id} className="teacher-class-item">
+                <strong>{group.name}</strong>
+                <p>{group.subject}</p>
+                <p>{group.students} alunos</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="dashboard-card">
-          <h3>Disciplinas</h3>
+          <h3>Desempenho médio por turma</h3>
+
+          <div className="performance-list">
+            {classes.map((group) => (
+              <div key={group.id} className="performance-item">
+                <div className="performance-header">
+                  <strong>{group.name}</strong>
+                  <span>{group.averageScore}</span>
+                </div>
+
+                <div className="performance-bar">
+                  <div
+                    className="performance-fill"
+                    style={{ width: `${group.averageScore * 10}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="dashboard-card">
+          <h3>Taxa de conclusão por turma</h3>
+
+          <div className="performance-list">
+            {classes.map((group) => (
+              <div key={group.id} className="performance-item">
+                <div className="performance-header">
+                  <strong>{group.name}</strong>
+                  <span>{group.completionRate}%</span>
+                </div>
+
+                <div className="performance-bar">
+                  <div
+                    className="completion-fill"
+                    style={{ width: `${group.completionRate}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="dashboard-card">
@@ -168,6 +220,7 @@ export default function TeacherDashboard() {
 
                   <div className="event-actions">
                     <button
+                      type="button"
                       className="hero-btn-outline btn-reset"
                       onClick={() => handleEdit(event)}
                     >
@@ -175,6 +228,7 @@ export default function TeacherDashboard() {
                     </button>
 
                     <button
+                      type="button"
                       className="delete-btn btn-reset"
                       onClick={() => handleDelete(event.id)}
                     >
