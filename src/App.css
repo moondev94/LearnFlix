@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
 
-/* ===== RESET / BASE ===== */
+/* RESET / BASE */
 
 * {
     margin: 0;
@@ -27,9 +27,7 @@ body {
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 
 .btn-reset {
@@ -46,7 +44,7 @@ span {
     color: var(--primary-color);
 }
 
-/* ===== PAGE TRANSITION ===== */
+/* PAGE TRANSITION */
 
 .page-transition {
     animation: fadeIn 0.35s ease;
@@ -65,7 +63,7 @@ span {
 }
 
 
-/* ====== HEADER ===== */
+/* HEADER */
 
 .header {
     position: sticky;
@@ -150,7 +148,7 @@ header h1 {
 }
 
 
-/* ===== MENU ===== */
+/* MENU */
 
 .menu {
     position: fixed;
@@ -204,7 +202,7 @@ header h1 {
 }
 
 
-/* ===== CARDS ===== */
+/* CARDS */
 
 .card {
     width: 350px;
@@ -259,7 +257,7 @@ header h1 {
 
 }
 
-/* ===== HOME / SIGN ===== */
+/* HOME / SIGN */
 
 .home {
     min-height: 100vh;
@@ -294,7 +292,7 @@ header h1 {
     line-height: 1.6;
 }
 
-/* BOTÕES */
+/* BUTTONS */
 
 .hero-actions {
     display: flex;
@@ -303,19 +301,14 @@ header h1 {
     flex-wrap: wrap;
 }
 
-/* BOTÃO PRINCIPAL */
-
 .hero-btn {
     padding: 0.85rem 1.8rem;
     border-radius: 10px;
     border: none;
-
     background: var(--primary-color);
     color: var(--text-light-color);
-
     font-weight: 600;
     cursor: pointer;
-
     transition: all 0.25s ease;
 }
 
@@ -325,19 +318,14 @@ header h1 {
     box-shadow: 0 8px 20px rgba(32, 105, 146, 0.25);
 }
 
-/* BOTÃO SECUNDÁRIO */
-
 .hero-btn-outline {
     padding: 0.85rem 1.8rem;
     border-radius: 10px;
-
     background: transparent;
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
-
     font-weight: 600;
     cursor: pointer;
-
     transition: all 0.25s ease;
 }
 
@@ -346,8 +334,78 @@ header h1 {
     transform: translateY(-2px);
 }
 
+/* AUTH PAGES */
 
-/* ===== ABOUT ===== */
+.sign-page {
+    width: 100%;
+    min-height: calc(100vh - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background-color: var(--bg-color);
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--elements-bg-color);
+    padding: 28px 24px;
+    border-radius: 16px;
+    box-shadow: rgba(50, 50, 93, 0.15) 0px 8px 20px -6px,
+        rgba(0, 0, 0, 0.15) 0px 4px 10px -6px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.auth-form input,
+.auth-form select {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-color);
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(32, 105, 146, 0.12);
+}
+
+.sign-submit-btn {
+    width: 100%;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    color: var(--text-light-color);
+    background-color: var(--primary-color);
+    padding: 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: 600;
+    margin-top: 6px;
+    box-sizing: border-box;
+}
+
+
+/* ABOUT */
 
 .about-page {
     width: 100%;
@@ -397,7 +455,7 @@ header h1 {
     opacity: 0.8;
 }
 
-/* ===== DASHBOARDS ===== */
+/* DASHBOARDS */
 
 .dashboard {
     padding: 2rem 3rem;
@@ -625,7 +683,7 @@ header h1 {
     justify-content: center;
 }
 
-/* ===== CALENDAR  ===== */
+/* CALENDAR */
 
 .calendar-card {
     grid-column: span 2;
@@ -789,7 +847,7 @@ header h1 {
   box-shadow: 0 8px 20px rgba(220, 38, 38, 0.2);
 }
 
-/* ===== CLASSES PAGE ===== */
+/* CLASSES PAGE */
 
 .classes-page {
     width: 100%;
@@ -842,7 +900,7 @@ header h1 {
     min-height: 52px;
 }
 
-/* ===== MOBILE GESTURES ===== */
+/* MOBILE GESTURES */
 
 .menu-overlay {
   position: fixed;
@@ -851,7 +909,7 @@ header h1 {
   z-index: 120;
 }
 
-/* ===== DESKTOP ===== */
+/* DESKTOP */
 
 @media screen and (min-width: 767px) {
 

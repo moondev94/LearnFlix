@@ -1,11 +1,8 @@
 import "../App.css";
 import { Link, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginStudent, loginTeacher, loginManager } from "../store/authSlice";
+import { useSelector } from "react-redux";
 
 export default function Home() {
-
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
 
   if (user?.role === "student") {
@@ -22,9 +19,7 @@ export default function Home() {
 
   return (
     <section className="home page-transition">
-
       <div className="hero">
-
         <h1>
           Bem-vindo ao <span>LearnFlix</span>
         </h1>
@@ -36,38 +31,19 @@ export default function Home() {
         </p>
 
         <div className="hero-actions">
-
-          <button
-            className="hero-btn btn-reset"
-            onClick={() => dispatch(loginStudent())}
-          >
-            Entrar como aluno
-          </button>
-
-          <button
-            className="hero-btn-outline btn-reset"
-            onClick={() => dispatch(loginTeacher())}
-          >
-            Entrar como professor
-          </button>
-
-          <button
-            className="hero-btn-outline btn-reset"
-            onClick={() => dispatch(loginManager())}
-          >
-            Entrar como gestor
-          </button>
+          <Link to="/signin">
+            <button className="hero-btn btn-reset">
+              Entrar
+            </button>
+          </Link>
 
           <Link to="/signup">
             <button className="hero-btn-outline btn-reset">
               Criar conta
             </button>
           </Link>
-
         </div>
-
       </div>
-
     </section>
   );
 }

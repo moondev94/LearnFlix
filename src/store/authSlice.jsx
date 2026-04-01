@@ -1,39 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+let storedUser = null;
+
+try {
+  const rawUser = localStorage.getItem("currentUser");
+  storedUser = rawUser ? JSON.parse(rawUser) : null;
+} catch (error) {
+  storedUser = null;
+  localStorage.removeItem("currentUser");
+}
+
 const initialState = {
-  user: null,
+  user: storedUser,
+  error: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginStudent: (state) => {
-      state.user = {
-        name: "Luan Martins",
-        role: "student",
-      };
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.error = null;
+      localStorage.setItem("currentUser", JSON.stringify(action.payload));
     },
 
-    loginTeacher: (state) => {
-      state.user = {
-        name: "Professor Luan",
-        role: "teacher",
-      };
+    setAuthError: (state, action) => {
+      state.error = action.payload;
     },
 
-    loginManager: (state) => {
-      state.user = {
-        name: "Gestor Luan",
-        role: "manager",
-      };
+    clearAuthError: (state) => {
+      state.error = null;
     },
 
     logout: (state) => {
       state.user = null;
+      state.error = null;
+      localStorage.removeItem("currentUser");
     },
   },
 });
 
-export const { loginStudent, loginTeacher, loginManager, logout } = authSlice.actions;
+export const { setUser, setAuthError, clearAuthError, logout } =
+  authSlice.actions;
+
 export default authSlice.reducer;

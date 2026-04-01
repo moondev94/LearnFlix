@@ -63,10 +63,12 @@ export default function Header() {
     };
   }, [touchStartX, touchEndX, showMenu]);
 
-  {showMenu && <div className="menu-overlay" onClick={() => setShowMenu(false)}></div>}
+  
 
   return (
+    
     <header className={`header ${showMenu ? "menu-active" : ""}`}>
+      {showMenu && <div className="menu-overlay" onClick={() => setShowMenu(false)}></div>}
       <div className='header-left'>
         <FontAwesomeIcon
           className='menu-bars'
@@ -132,11 +134,11 @@ export default function Header() {
         </ul>
       </nav>
 
-      <Link to={logged ? "/" : "/signup"} className="header-right">
-        <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
-          {logged ? "Sair" : "Sign Up"}
-        </button>
-      </Link>
+      <Link to={logged ? "/" : "/signin"} className="header-right">
+  <button className="sign-in-btn btn-reset" onClick={handleAuthClick}>
+    {logged ? "Sair" : "Entrar"}
+  </button>
+</Link>
     </header>
   );
 }

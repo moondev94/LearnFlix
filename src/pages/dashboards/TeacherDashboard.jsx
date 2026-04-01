@@ -154,10 +154,6 @@ export default function TeacherDashboard() {
         </div>
 
         <div className="dashboard-card">
-          <h3>Materiais</h3>
-        </div>
-
-        <div className="dashboard-card">
           <h3>{editingEventId ? "Editar avaliação" : "Cadastrar avaliação"}</h3>
           <form className="event-form" onSubmit={handleSubmit}>
             <input
